@@ -1,33 +1,28 @@
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-            if (strs.empty()) {
+        if (strs.empty()) 
+        {
         return "";
-    }
+        }
 
-    // Take the first string as a reference
-    string prefix = strs[0];
-
-    // Iterate through the remaining strings
-    for (int i = 1; i < strs.size(); ++i) {
-        // Iterate through characters in the current string and the current prefix
-        int j;
-        for (j = 0; j < min(prefix.size(), strs[i].size()); ++j) {
-            if (prefix[j] != strs[i][j]) {
-                break;
+        string assume = strs[0];
+        for(int i = 0 ; i < strs.size() ; i++)
+        {
+            int j;
+            for( j = 0 ; j < min(assume.size(),strs[i].size()) ; j++)
+            {
+                if(assume[j] != strs[i][j])
+                {
+                    break;
+                }
+            }
+            assume = assume.substr(0,j);
+            if(assume.empty())
+            {
+                break; //yhin tut gya hoga j ki condition 0 bnegi dog mei
             }
         }
-
-        // Update the prefix to the common part
-        prefix = prefix.substr(0, j);
-
-        // If the prefix becomes empty, no common prefix exists
-        if (prefix.empty()) {
-            break;
-        }
+        return assume;
     }
-
-    return prefix;
-}
-    
 };
