@@ -10,7 +10,7 @@ public:
         for(int i = 0 ; i < strs.size() ; i++)
         {
             int j;
-            for( j = 0 ; j < min(assume.size(),strs[i].size()) ; j++)
+            for( j = 0 ; j < strs[i].size() ; j++)
             {
                 if(assume[j] != strs[i][j])
                 {
