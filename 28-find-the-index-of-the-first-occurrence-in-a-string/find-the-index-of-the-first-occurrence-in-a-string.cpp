@@ -33,6 +33,10 @@ public:
             }
             
         }
-        return (secondP == needle.size()) ? firstIndex : -1;
+        if(secondP == needle.size())return firstIndex;
+        else
+        {
+            return -1;
+        }
     }
 };
