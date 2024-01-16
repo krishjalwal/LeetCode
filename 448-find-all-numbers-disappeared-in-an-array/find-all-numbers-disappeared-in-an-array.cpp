@@ -1,18 +1,20 @@
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
-        
-        sort(nums.begin() , nums.end());
-        vector<int> arr;
-        vector<int> answer;
-        
-        for (int i = 1, j = 0; i <= nums.size(); i++) {
-            while (j < nums.size() && nums[j] < i) {
-                j++;
-            }
 
-            if (j == nums.size() || nums[j] > i) {
-                answer.push_back(i);
+        vector<int> answer;
+
+        for (int i = 0; i < nums.size(); i++) {
+            int index = abs(nums[i]) - 1;
+            if (nums[index] > 0) {
+                nums[index] = -nums[index];
+            }
+        }
+
+        // Iterate through the array again to find missing numbers
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] > 0) {
+                answer.push_back(i + 1);
             }
         }
 
