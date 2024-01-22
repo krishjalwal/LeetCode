@@ -1,34 +1,36 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> result(2, 0);
+        vector<int> answer;
+        vector<int> dubli;
+        for (int i = 1; i <= nums.size(); i++) {
+            dubli.push_back(i);
+        }
 
-        // Find the duplicated number
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                if (nums[i] == nums[j]) {
-                    result[0] = nums[i];
-                    break;
-                }
+        unordered_map<int, int> hashing;
+
+        for (auto it : nums) {
+            hashing[it]++;
+        }
+
+        for (auto it : hashing) {
+            int repeat = it.second;
+            if (repeat > 1) {
+                answer.push_back(it.first); // Push the duplicated number
             }
         }
 
-        // Find the missing number
-        for (int i = 1; i <= n; ++i) {
-            bool found = false;
-            for (int j = 0; j < n; ++j) {
-                if (nums[j] == i) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                result[1] = i;
-                break;
-            }
+        int result = 0;
+
+        for (int x : dubli) {
+            result ^= x;
         }
 
-        return result;
+        for (int x : nums) {
+            result ^= x;
+        }
+
+        answer.push_back(result ^ answer[0]); // XOR the duplicated number with the result to find the missing number
+        return answer;
     }
 };
