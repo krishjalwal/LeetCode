@@ -3,28 +3,26 @@ public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
 
         vector<int> ans;
-        sort(arr.begin() , arr.end() , [&](int a , int b)
+        int l = 0; int h = arr.size() - 1;
+
+        while(h - l >= k)
         {
-            if(abs(a-x) == abs(b-x))
+            if( x - arr[l] > arr[h] - x )
             {
-                return a < b;
+                l++;
             }
             else
             {
-                return abs(a-x) < abs(b-x);
+                h--;
             }
-        });
+        }
 
-        for(int i = 0 ; i < k; i++)
+        for(int i = l ; i <= h ; i++)
         {
             ans.push_back(arr[i]);
         }
 
-        sort(ans.begin() , ans.end());
-
         return ans;
-
-
 
     }
 };
