@@ -1,35 +1,46 @@
 class Solution {
 public:
-    
-    bool isValid(const vector<int>& nums, int k, int target) {
-        int count = 1;
-        int sum = 0;
 
-        for (int num : nums) {
-            sum += num;
-            if (sum > target) {
-                sum = num;
-                count++;
+    bool possible(vector<int>& arr, int x, int mid) {
+        int total = 0;
+        int counter = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] > mid) {
+                return false;
+            }
+            if (total + arr[i]> mid) {
+                counter++;
+                total = arr[i];
+                if(counter>x)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                total += arr[i];
             }
         }
 
-        return count <= k;
+        return counter < x;
     }
 
     int splitArray(vector<int>& nums, int k) {
-        int left = *max_element(nums.begin(), nums.end());
-        int right = accumulate(nums.begin(), nums.end(), 0);
+        int start = 0;
+        int end = accumulate(nums.begin(), nums.end(), 0);
+        int ans = -1;
 
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (isValid(nums, k, mid)) {
-                right = mid;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (possible(nums, k, mid)) {
+                ans = mid;
+                end = mid - 1;
             } else {
-                left = mid + 1;
+                start = mid + 1;
             }
         }
 
-        return left;
+        return ans;
     }
-
 };
