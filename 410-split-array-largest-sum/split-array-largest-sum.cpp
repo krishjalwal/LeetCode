@@ -9,10 +9,17 @@ public:
             if (arr[i] > mid) {
                 return false;
             }
-            total += arr[i];
-            if (total > mid) {
+            if (total + arr[i]> mid) {
                 counter++;
                 total = arr[i];
+                if(counter>x)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                total += arr[i];
             }
         }
 
