@@ -1,22 +1,30 @@
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-            auto compareByCloseness = [&](int a, int b) {
-        if (abs(a - x) == abs(b - x)) {
-            return a < b;
+
+        vector<int> ans;
+        sort(arr.begin() , arr.end() , [&](int a , int b)
+        {
+            if(abs(a-x) == abs(b-x))
+            {
+                return a < b;
+            }
+            else
+            {
+                return abs(a-x) < abs(b-x);
+            }
+        });
+
+        for(int i = 0 ; i < k; i++)
+        {
+            ans.push_back(arr[i]);
         }
-        return abs(a - x) < abs(b - x);
-    };
 
-    // Sorting the array based on the custom comparator
-    sort(arr.begin(), arr.end(), compareByCloseness);
+        sort(ans.begin() , ans.end());
 
-    // Taking the first k elements from the sorted array
-    vector<int> result(arr.begin(), arr.begin() + k);
+        return ans;
 
-    // Sorting the result in ascending order
-    sort(result.begin(), result.end());
 
-    return result;
+
     }
 };
