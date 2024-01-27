@@ -1,28 +1,36 @@
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-        if (strs.empty()) 
-        {
-        return "";
-        }
+        string ans = "";
+        int i = 0 ;
 
-        string assume = strs[0];
-        for(int i = 0 ; i < strs.size() ; i++)
+        while(true)
         {
-            int j;
-            for( j = 0 ; j < strs[i].size() ; j++)
+            char current = 0 ; 
+            for(auto str : strs)
             {
-                if(assume[j] != strs[i][j])
+                if(i >= str.size())
                 {
+                    current = 0 ;
+                    break;
+                }
+                if(current == 0)
+                {
+                    current = str[i];
+                }
+                else if(str[i] != current)
+                {
+                    current = 0;
                     break;
                 }
             }
-            assume = assume.substr(0,j);
-            if(assume.empty())
+            if(current == 0)
             {
-                break; //yhin tut gya hoga j ki condition 0 bnegi dog mei
+                break;
             }
+            ans += current;
+            i++;
         }
-        return assume;
+        return ans;
     }
 };
