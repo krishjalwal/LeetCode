@@ -7,45 +7,43 @@ public:
             hash[s[i] - 'a']++;
         }
 
-        //most frequent
-        char most_frequent;
-        int frequent = INT_MIN;
-
+        char most_freq;
+        int max_freq = INT_MIN;
         for(int i = 0 ; i < 26 ; i++)
         {
-            if(hash[i] > frequent)
+            if(hash[i] > max_freq)
             {
-                frequent = hash[i];
-                most_frequent = i + 'a';
+                max_freq = hash[i];
+                most_freq = i + 'a';
             }
         }
 
-        int index = 0 ;
-        while(frequent >0 && index < s.size())
-            {
-                s[index] = most_frequent;
-                frequent--;
-                index+=2;
-            }
+        int index = 0 ; 
+        while(max_freq > 0 && index < s.size())
+        {
+            s[index] = most_freq;
+            max_freq --;
+            index = index + 2;
+        }
 
-            if(frequent != 0)
-            {
-                return "";
-            }
+        if(max_freq != 0)
+        {
+            return "";
+        }
 
-            hash[most_frequent - 'a'] = 0;
+        hash[most_freq - 'a'] = 0;
 
-            for(int i = 0 ; i < 26 ; i++)
+        for(int i = 0 ; i < 26 ; i++)
+        {
+            while(hash[i] > 0)
             {
-                while(hash[i]>0)
-                {
-                    index = index >= s.size() ? 1 : index;
-                    s[index] = i + 'a';
-                    hash[i]--;
-                    index+=2;
-                }
+                index = index >= s.size() ? 1 : index;
+                s[index] = i + 'a';
+                hash[i]--;
+                index = index + 2;
+
             }
+        }
         return s;
-
     }
 };
