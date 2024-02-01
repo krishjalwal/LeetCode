@@ -35,7 +35,6 @@ public:
     };
 
     string numberToWords(int num) {
-
         if (num == 0) {
             return "Zero";
         }
@@ -43,7 +42,6 @@ public:
             if (num >= it.first) {
                 string a = "";
                 if (num >= 100) {
-
                     a = numberToWords(num / it.first) + " ";
                 }
 
@@ -51,7 +49,6 @@ public:
 
                 string c = "";
                 if (num % it.first != 0) {
-
                     c = " " + numberToWords(num % it.first);
                 }
                 return a + b + c;
