@@ -5,7 +5,6 @@ public:
         int maxLen = 0;
         unordered_map<char, int> charMap;
         int i = 0, j = 0;
-
         while (j < n) {
             if (charMap[s[j]] > 0) {
                 charMap[s[i]]--;
@@ -16,7 +15,6 @@ public:
                 j++;
             }
         }
-
         return maxLen;
     }
 };
