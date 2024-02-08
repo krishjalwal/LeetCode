@@ -5,17 +5,24 @@ public:
         {
             return 0;
         }
-        else if(x==1)
+        
+        int start = 1; int end = x;
+        while(start<=end)
         {
-            return 1;
-        }
-        for(long long int i = 1 ; i <= x ; i++)
-        {
-            if(i*i>x)
+            int mid = start + (end - start)/2;
+            if(mid==x/mid)
             {
-                return i-1;
+                return mid;
+            }
+            else if(mid < x/mid)
+            {
+                start = mid + 1;
+            }
+            else
+            {
+                end = mid - 1;
             }
         }
-        return 0;
+        return end;
     }
 };
