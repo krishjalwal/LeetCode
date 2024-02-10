@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool isPalin(string &s, int &i, int &j) {
+    bool isPalin(string& s, int& i, int& j) {
         string str = s.substr(i, j - i + 1);
         string rev = str;
         reverse(str.begin(), str.end());
