@@ -6,7 +6,7 @@ public:
         int j = n;
         for (int i = 0; i < n; i++) {
             ans.push_back(nums[i]);
-            while(j<nums.size()) {
+            while (j < nums.size()) {
                 ans.push_back(nums[j]);
                 j++;
                 break;
