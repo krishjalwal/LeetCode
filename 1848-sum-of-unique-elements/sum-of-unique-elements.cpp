@@ -1,22 +1,10 @@
 class Solution {
 public:
     int sumOfUnique(vector<int>& nums) {
-        unordered_map<int,int> mp;
-        int count = 0 ; 
-
-        for(auto it : nums)
-        {
-            mp[it]++;
-        }
-
-        for(auto it : mp)
-        {
-            if(it.second==1)
-            {
-                count += it.first;
-            }
-        }
-
-        return count; 
+        int result = 0;
+        unordered_map<int, int> map_count;
+        for(auto& i:nums)map_count[i]++;
+        for(auto& i:map_count) if(i.second==1) result += i.first;
+        return result;
     }
 };
