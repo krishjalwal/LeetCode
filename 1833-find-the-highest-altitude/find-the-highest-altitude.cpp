@@ -8,7 +8,6 @@ public:
         {
             alt = altitude[i] + gain[i];
             altitude.push_back(alt);
-            cout<<alt;
         }
         int max = 0;
         for(int i = 0 ; i < altitude.size(); i++)
