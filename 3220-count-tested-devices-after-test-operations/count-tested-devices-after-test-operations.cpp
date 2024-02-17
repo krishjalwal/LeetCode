@@ -1,22 +1,16 @@
 class Solution {
 public:
-    int countTestedDevices(vector<int>& b) {
-        int count = 0 ; 
-        for(int i = 0 ; i < b.size() ; i++)
-        {
-            if(b[i]!=0)
-            {
-                count++;
-                for(int j = i + 1; j < b.size() ; j++)
-                {
-                    if(b[j]!=0)
-                    {
-                        b[j] = b[j] - 1;
-                    }
+    int countTestedDevices(vector<int>& batteryPercentages) {
+        int ans=0;
+        for ( int i=0;i<batteryPercentages.size();i++ ){
+            if( batteryPercentages[i]>0 ){
+                ans++;
+                for ( int j=i+1 ; j <batteryPercentages.size();j++ ){
+                    batteryPercentages[j]--;
                 }
             }
         }
 
-        return count;
+        return ans;
     }
 };
