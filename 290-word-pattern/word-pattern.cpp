@@ -7,7 +7,8 @@ public:
         vector<string> v;
 
         string temp = "";
-        for(int i = 0 ; i < s.size() ; i++)
+        int n = s.size();
+        for(int i = 0 ; i < n ; i++)
         {
             if(s[i] == ' ')
             {
@@ -26,8 +27,8 @@ public:
         }
 
         string t = "";
-
-        for(int i = 0 ; i < v.size() ; i++)
+        int vsize = v.size();
+        for(int i = 0 ; i < vsize ; i++)
         {
             if(mp1.find(v[i]) == mp1.end() and mp2.find(pattern[i])==mp2.end())
             {
