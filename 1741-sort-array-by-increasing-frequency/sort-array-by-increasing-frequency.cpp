@@ -1,20 +1,28 @@
 class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
-        // Create a frequency map
-        unordered_map<int, int> freqMap;
-        for (int num : nums) {
-            freqMap[num]++;
+        int n=nums.size();
+        map<int,int> mp;
+        map<int,vector<int>> pkp;
+        for(int i=0;i<n;i++){
+           mp[nums[i]]++;
         }
-        
-        // Custom sort based on frequency and value
-        sort(nums.begin(), nums.end(), [&](int a, int b) {
-            if (freqMap[a] == freqMap[b]) {
-                return a > b; // If frequencies are same, sort by value in decreasing order
+        for(int i=0;i<n;i++){
+          pkp[mp[nums[i]]].push_back(nums[i]);
+        //   int kk=mp[s[i]];
+        //   cout<<kk<<endl;
+        }
+
+        vector<int> ans;
+
+        for(auto it:pkp){
+            sort(it.second.begin(),it.second.end());
+            
+            for(int i=it.second.size()-1;i>=0;i--){
+                ans.push_back(it.second[i]);
             }
-            return freqMap[a] < freqMap[b]; // Otherwise, sort by frequency in increasing order
-        });
-        
-        return nums;
+        }
+
+        return ans;
     }
 };
