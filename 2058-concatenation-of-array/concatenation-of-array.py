@@ -5,15 +5,6 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        x = []
-
-        for i in nums:
-            x.append(i)
-            
-            
-        for j in nums:
-            x.append(j)
-            
-
-        return x
+        
+        return nums + nums 
         
