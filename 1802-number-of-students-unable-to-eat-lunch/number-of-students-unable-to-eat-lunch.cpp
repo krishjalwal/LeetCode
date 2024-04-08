@@ -1,43 +1,26 @@
 class Solution {
 public:
     int countStudents(vector<int>& students, vector<int>& sandwiches) {
-        
-        stack<int> st;
         queue<int> q;
-
-        for(int i = sandwiches.size() - 1; i >= 0; i--)
-        {
-            st.push(sandwiches[i]);
-        }
-
-        for(int i = 0 ; i < students.size() ; i++)
-        {
+        int n = students.size();
+        for(int i=0;i<n;i++){
             q.push(students[i]);
         }
-        
+        int i = 0; //traverse the sandwiches array
         int count = 0;
-
-        while(!q.empty())
-        {
-            if(q.front() == st.top())
-            {
+        while(q.size()>0 && count!=q.size()){
+            if(q.front()==sandwiches[i]){
+                count = 0;
                 q.pop();
-                st.pop();
-                count = 0; // Resetting count as a student got their preferred sandwich
+                i++;
             }
-            else
-            {
-                int student = q.front();
+            else{
+                q.push(q.front());
                 q.pop();
-                q.push(student);
                 count++;
-
-                // If we looped through all students and couldn't serve their preferred sandwich, break the loop
-                if(count == q.size()) 
-                    break;
             }
         }
+        return q.size();
 
-        return q.size(); // Remaining students who couldn't get their preferred sandwich
     }
 };
