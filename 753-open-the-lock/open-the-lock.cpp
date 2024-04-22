@@ -1,37 +1,59 @@
 class Solution {
 public:
+    // Function to increment the j-th digit of the lock combination
+    string plusOne(string s, int j) {
+        string res = s;
+        if (res[j] == '9')
+            res[j] = '0';
+        else
+            res[j] += 1;
+        return res;
+    }
+
+    // Function to decrement the j-th digit of the lock combination
+    string minusOne(string s, int j) {
+        string res = s;
+        if (res[j] == '0')
+            res[j] = '9';
+        else
+            res[j] -= 1;
+        return res;
+    }
+
+    // Function to find the minimum turns required to open the lock
     int openLock(vector<string>& deadends, string target) {
-        unordered_set<string> dead(deadends.begin(), deadends.end());
-        if (dead.find("0000") != dead.end())
-            return -1;
-        if (target == "0000")
-            return 0;
-
-        queue<pair<string, int>> q;
-        q.push({"0000", 0});
         unordered_set<string> visited;
-        visited.insert("0000");
+        vector<string> parent;
+        string strlock;
+        int count = 0;
+        vector<string> child(1, "0000");
 
-        while (!q.empty()) {
-            auto [current, turns] = q.front();
-            q.pop();
+        while (!child.empty()) {
+            parent = child;
+            child = {};
 
-            for (int i = 0; i < 4; ++i) {
-                for (int j = -1; j <= 1; j += 2) {
-                    string next = current;
-                    next[i] = (next[i] - '0' + j + 10) % 10 + '0';
+            for (string strlock : parent) {
+                if (find(deadends.begin(), deadends.end(), strlock) != deadends.end()) continue;
 
-                    if (next == target)
-                        return turns + 1;
-                    if (visited.find(next) == visited.end() &&
-                        dead.find(next) == dead.end()) {
-                        q.push({next, turns + 1});
-                        visited.insert(next);
+                if (strlock == target) {
+                    return count;
+                }
+
+                for (int j = 0; j < 4; j++) {
+                    string up = plusOne(strlock, j);
+                    if (!visited.count(up)) {
+                        child.push_back(up);
+                        visited.insert(up);
+                    }
+                    string down = minusOne(strlock, j);
+                    if (!visited.count(down)) {
+                        child.push_back(down);
+                        visited.insert(down);
                     }
                 }
             }
+            count++;
         }
-
-        return -1;
+        return -1; // Target unreachable
     }
 };
