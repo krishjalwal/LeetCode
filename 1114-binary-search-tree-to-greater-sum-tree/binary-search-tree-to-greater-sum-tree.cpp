@@ -10,28 +10,22 @@
  * };
  */
 class Solution {
+    void inOrderRevrse(TreeNode* root,int&sum){
+        if(!root)return;
+        if(!root->left && !root->right){
+            root->val+=sum;
+            sum=root->val;
+            return;
+        }
+        inOrderRevrse(root->right,sum);
+        root->val+=sum;
+        sum=root->val;
+        inOrderRevrse(root->left,sum);
+    }
 public:
-
-    int sum = 0;
     TreeNode* bstToGst(TreeNode* root) {
-        trav(root);
-        makegst(root,0);
+        int sum=0;
+        inOrderRevrse(root,sum);
         return root;
-    }
-
-    void trav(TreeNode* root){
-        if(root == nullptr)return;
-        trav(root->left);
-        sum += root->val;
-        trav(root->right);
-    }
-
-    int makegst(TreeNode* root, int give){
-        if(root == nullptr)return 0;
-        int left = makegst(root->left,give);
-        int right = makegst(root->right,give+root->val+left);
-        int ret = root->val + left + right;
-        root->val = sum - left - give;
-        return ret;
     }
 };
