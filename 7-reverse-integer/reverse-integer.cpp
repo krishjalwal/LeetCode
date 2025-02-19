@@ -1,18 +1,17 @@
 class Solution {
 public:
     int reverse(int x) {
-        int ans = 0;
+        long long result = 0;  // Use long long to detect overflow
+        
         while (x != 0) {
-            int rem = x % 10;
+            int digit = x % 10;  // Extract last digit
+            result = result * 10 + digit;  // Build reversed number
+            x = x / 10;  // Remove last digit
             
-            // Check for overflow before updating ans
-            if (ans > INT_MAX / 10 || ans < INT_MIN / 10) {
-                return 0;
-            }
-            
-            ans = ans * 10 + rem;
-            x /= 10;
+            // Check if result exceeds int range
+            if (result > INT_MAX || result < INT_MIN) return 0;
         }
-        return ans;
+        
+        return (int)result;
     }
 };
