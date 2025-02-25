@@ -1,23 +1,18 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        unordered_map<int,int>hashing;
+        int ans = 0;
 
-        for(auto it : nums)
+        vector<int> arr(nums.size(),0);
+
+        for(int i = 0 ; i < nums.size() ; i++)
         {
-            hashing[it]++;
-        }
-
-        for(auto number : hashing)
-        {
-            int mynumber = number.first;
-            int repeat = number.second;
-
-            if(repeat > 1)
+            if(arr[nums[i]]==-1)
             {
-                return mynumber;
+                ans = nums[i];
             }
+            arr[nums[i]] = -1;
         }
-        return 0;
+        return ans; 
     }
 };
