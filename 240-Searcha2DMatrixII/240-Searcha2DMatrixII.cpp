@@ -1,50 +1,29 @@
-// Last updated: 8/10/2026, 6:32:39 PM
+// Last updated: 8/10/2026, 8:02:53 PM
 1class Solution {
 2public:
-3
-4   bool BST(vector<int>&arr, int low, int high ,int k)
-5    {
-6        if(k >= arr[low] and  k <= arr[high])
-7        {
-8
-9        
+3    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+4        int m = matrix.size();
+5        int n = matrix[0].size();
+6
+7        // Start at top-right corner
+8        int row = 0;
+9        int col = n - 1;
 10
-11        while(low <= high)
-12        {
-13            int mid = low + (high - low)/2;
-14
-15            if(arr[mid]==k)
-16            {
-17                return true;
-18            }
-19
-20            else if(arr[mid] < k)
+11        while (row < m && col >= 0) {
+12            if (matrix[row][col] == target) {
+13                return true; // Target found
+14            } 
+15            
+16            else if (matrix[row][col] > target) 
+17            {
+18                col--; // Target is smaller, eliminate current column
+19            } 
+20            else 
 21            {
-22                low = mid + 1;
+22                row++; // Target is larger, eliminate current row
 23            }
-24
-25            else
-26            {
-27                high = mid - 1;
-28            }
-29        }
-30        }
-31        return false;
-32    }
-33
-34    bool searchMatrix(vector<vector<int>>& matrix, int target) {
-35        
-36        int m = matrix.size();
-37        int n = matrix[0].size();
-38
-39        for(int i = 0 ; i < m ; i++)
-40        {
-41            bool ans = BST(matrix[i],0,n-1,target);
-42            if(ans)
-43            {
-44                return true;
-45            }
-46        }
-47        return false;
-48    }
-49};
+24        }
+25
+26        return false; // Target not found
+27    }
+28};
